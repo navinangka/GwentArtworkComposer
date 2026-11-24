@@ -1,0 +1,184 @@
+[center][size=6][b]Gwent Artwork Composer[/b][/size]
+[size=3][i]Pick your favourite Gwent art from every mod you own - card by card - and throw your own pictures in too.[/i][/size]
+
+[size=2]Version 0.2 beta  |  Standalone Windows tool  |  No Python needed[/size][/center]
+
+[line]
+
+[size=5][b]Why I made this[/b][/size]
+
+Over time I ended up with a bunch of artwork mods installed, and every single one of them had cards I loved... and cards I didn't. One mod had the best Geralt, another had a gorgeous Ciri, a third did the Monsters deck way better than anyone else.
+
+The problem? Artwork mods overwrite each other. You pick one winner in your load order and that's it - you get [i]all[/i] of its cards, good and bad. Juggling priorities and hand-copying files out of texture caches got old really fast.
+
+And on top of that, I wanted to put a few of [i]my own[/i] pictures on some cards. 
+
+So I put together a little tool for myself (more on how it was made below). It scans your game and all your installed artwork mods, shows you every version of every card side by side, lets you click the one you want (or drop in your own image), and then packs only your picks into one small mod. It worked well enough that I figured other people might want it too, so here it is.
+
+[line]
+
+[size=5][b]How this was made (honest note)[/b][/size]
+
+I'll be upfront about this: I can't really write Python. I know some basic C, enough to read code and understand what's going on, but not enough to build a whole desktop app in Python by myself.
+
+So most of the code was written by AI. My part was the design and the testing: I came up with the idea, designed how the tool should work and what it should do, and tested the functions as they were built. When something didn't work the way I wanted, I explained the problem and we went around again until it did.
+
+I'm telling you this because I think you deserve to know how it was built. It also means I'm still learning, so please be patient with bug reports. I do read them and I will fix things.
+
+[line]
+
+[size=5][b]What it does[/b][/size]
+
+[list]
+[*][b]Mix and match per card[/b] - Every card shows a gallery of all available versions: the vanilla game art plus every artwork mod you have installed. Click the one you like. Do that for as many (or as few) cards as you want.
+[*][b]Use your own images[/b] - Upload any PNG, JPG, WEBP, BMP, TGA or DDS onto a card. The tool center-crops and resizes it to the exact size that card needs, so you don't have to fiddle in Photoshop first.
+[*][b]Drag & drop[/b] - Drop an image straight onto a card row or an image slot. Drop a whole folder (or a bunch of images) and they get matched to cards by file name automatically.
+[*][b]Bulk import[/b] - Got a folder full of art named like [i]neu_geralt.png[/i], [i]nor_ciri.png[/i]? "Import images..." matches them all in one go.
+[*][b]Reads mods the way the game does[/b] - Pulls art straight out of [i]texture.cache[/i] files and loose files, respects your [i]mods.settings[/i] load order, and shows which source the game would actually use right now.
+[*][b]Vortex-friendly[/b] - Understands Vortex deployments, so if several mods are deployed into one folder it can still tell them apart from their staging packages.
+[*][b]Add mods that aren't installed[/b] - "Add mod..." lets you point at any extra artwork mod folder (or a Vortex staging package) and use it as a source without installing it.
+[*][b]Card matching across mods[/b] - Different mods sometimes store the same card under different file names. The tool reads the card XMLs to link them up, and if something still doesn't line up you can match a card by hand with "Choose card from..." in a thumbnail picker.
+[*][b]Alternate art support[/b] - Cards with alternate versions ([i]_alt[/i] textures) are grouped together so they're easy to find.
+[*][b]Faithful artwork compatibility[/b] - If you use a Faithful-style artwork DLC, the export includes a compatibility XML so names and pictures still line up with your main card XML. It only touches names and pictures - no gameplay rules are changed (Redux players, you're safe).
+[*][b]Search & filters[/b] - Search by card name, filter by faction (Northern Realms, Nilfgaard, Monsters, Scoia'tael, Skellige, Neutral, Special), or show only cards from one specific source.
+[*][b]Save your work[/b] - Save everything as a [i].gwentproj[/i] project file (uploaded images included) and pick up where you left off later. Rebuild the mod any time you install something new.
+[*][b]Export to PNG[/b] - Save one card, a selection, or every chosen card out as PNG. Great for wallpapers, printing your own deck, or just backing things up.
+[*][b]Small, clean output[/b] - The exported mod only contains the cards you picked. Nothing else, no gameplay files.
+[*][b]Never touches your game[/b] - The tool only [i]reads[/i] the game and your mods. Everything you make goes into a new ZIP that you install like any other mod.
+[/list]
+
+[line]
+
+[size=5][b]Requirements[/b][/size]
+
+[list]
+[*]Windows 10 / 11
+[*]The Witcher 3: Wild Hunt
+[*]At least one Gwent artwork mod if you want something to mix (it works with just vanilla art + your own pictures too)
+[*]A mod manager like Vortex is recommended for installing the result, but manual install works fine
+[/list]
+
+[line]
+
+[size=5][b]How to use it[/b][/size]
+
+[b]1. Scan your game[/b]
+Run [i]GwentArtworkComposer.exe[/i] and click [b]Scan game + mods...[/b]. Point it at your main Witcher 3 folder (the one with [i]bin[/i] and [i]content[/i] inside). It'll find the vanilla art, the official DLC, and every artwork mod in your [i]Mods[/i] and [i]DLC[/i] folders. The first scan can take a moment if you have a lot of mods.
+
+[b]2. Pick a card[/b]
+Click any card in the list on the left. The gallery on the right shows every version of that card from every source, plus an [i]Uploaded image[/i] slot and a [i]No texture[/i] slot.
+
+[b]3. Choose the art you want[/b]
+Click a picture in the gallery and that's it - that card now uses it. Tip: tick [b]Go to next card after choosing[/b] and you can fly through a whole deck just by clicking. Arrow keys work too.
+
+[b]4. Add your own pictures (optional)[/b]
+Any of these work:
+[list]
+[*]Click the [i]Uploaded image[/i] slot and pick a file
+[*]Drag an image onto the card row or the gallery
+[*]Use [b]Import images...[/b] for a whole folder (name files after the card, e.g. [i]neu_geralt.png[/i])
+[/list]
+Images are center-cropped to the card shape automatically, so a portrait-style picture works best.
+
+[b]5. Save your project[/b]
+Hit [b]Save project...[/b] so you don't lose your picks. You can open it again later, or just drag the [i].gwentproj[/i] file onto the window.
+
+[b]6. Export the mod[/b]
+Click [b]Export mod ZIP...[/b]. You'll get a ZIP containing [i]mod0000GwentArtworkComposer[/i].
+
+[b]7. Install it[/b]
+[list]
+[*][b]Vortex:[/b] install the ZIP like any other mod and give it the [b]highest priority[/b] over your other artwork mods.
+[*][b]Manual:[/b] extract it into your Witcher 3 folder so you end up with [i]Mods\mod0000GwentArtworkComposer[/i]. The "0000" prefix makes it load first. If you use a load order in [i]mods.settings[/i], put it at the top.
+[/list]
+
+Then launch the game and enjoy your custom deck!
+
+[line]
+
+[size=5][b]Good to know[/b][/size]
+
+[list]
+[*][b]Every card starts as "No texture".[/b] That means it's left out of the export and the game will use whatever it normally would. Only cards you actually pick end up in the mod.
+[*][b]Picking "Game original" really means original.[/b] The vanilla texture gets packed into your mod, so other artwork mods can't override that card anymore.
+[*][b]Keep your other artwork mods installed.[/b] Your exported mod only covers the cards you picked; the rest still come from your normal setup. You [i]can[/i] remove the others if you picked every card you care about, but it's not required.
+[*][b]Installed a new artwork mod?[/b] Open your project, scan again, pick any new favourites, and export again. Overwrite the old one.
+[*][b]Right-click is your friend.[/b] Right-click a card or a gallery image to open it full size, save it as PNG, or choose a matching card from another source.
+[*][b]Your own art:[/b] for the sharpest result use images at least as big as the card texture. Small images will be upscaled and may look soft in-game.
+[/list]
+
+[line]
+
+[size=5][b]FAQ[/b][/size]
+
+[b]Q: Does this change gameplay or card stats?[/b]
+A: No. It only packs card pictures (and, if needed, a names/pictures-only XML for Faithful compatibility). No abilities, strengths or rules are touched.
+
+[b]Q: Will it break my game or my other mods?[/b]
+A: It doesn't modify any existing files. It only reads them and creates a new mod. If you don't like the result, just uninstall the exported mod.
+
+[b]Q: My mod isn't showing up as a source.[/b]
+A: Make sure it's actually in [i]Mods[/i] or [i]DLC[/i] with a [i]content[/i] folder inside, then scan again. If it's somewhere else (or only in Vortex staging), use [b]Add mod...[/b] and point at it directly.
+
+[b]Q: A card shows the wrong picture / the same card is split in two.[/b]
+A: Some mods name their files differently. Select the card, right-click the source in the gallery and use [b]Choose card from...[/b] to match it manually. The match is saved with your project.
+
+[b]Q: My picks aren't showing in-game.[/b]
+A: Almost always load order. Your exported mod needs to win over every other artwork mod - highest priority in Vortex, or top of [i]mods.settings[/i].
+
+[b]Q: Windows Defender / SmartScreen warned me about the exe.[/b]
+A: It's an unsigned single-file app made with PyInstaller, and those sometimes get flagged. Click "More info" then "Run anyway" if you trust it, or feel free to scan it on VirusTotal first.
+
+[b]Q: Can I share the mod I exported?[/b]
+A: For personal use, go wild. If you want to upload it publicly, it contains art from other people's mods - please get permission from those authors first.
+
+[line]
+
+[size=5][b]Known issues / beta notes[/b][/size]
+
+This is still a beta. It's been working nicely for me, but everyone's mod setup is different. If something goes wrong, please post in the Bugs tab with:
+[list]
+[*]What you clicked / what you were doing
+[*]The error message (a screenshot is perfect)
+[*]Which artwork mods you have installed
+[/list]
+That helps me fix things way faster.
+
+[line]
+
+[size=5][b]License & permissions[/b][/size]
+
+[b]You CAN:[/b]
+[list]
+[*]Use the tool for free, as much as you like.
+[*]Use the mods you export with it in your own game.
+[*]Post screenshots and videos of your custom decks (a link back here is appreciated).
+[*]Link to this page anywhere.
+[/list]
+
+[b]You CAN'T:[/b]
+[list]
+[*][b]Claim this tool as your own work.[/b] That includes renaming it, rebranding it, or removing the credits.
+[*]Re-upload the tool, or a modified version of it, to Nexus or any other site without my permission.
+[*]Sell the tool or put it behind a paywall, Patreon tier, or any other kind of payment.
+[*]Bundle it inside other mods or modpacks without asking me first.
+[/list]
+
+[b]About the artwork:[/b] this tool doesn't come with any card art. Every picture you use belongs to CD PROJEKT RED or to the author of the mod it came from. A mod you export with this tool is only for your personal use. If you want to share one publicly, you need permission from every artist whose work is inside it, and you need to credit them.
+
+If you'd like to make something based on this tool, or you have an idea for working on it together, just message me. I'm happy to talk about it.
+
+The software is provided "as is", without any warranty. Back up your mods folder if you're worried, although the tool never changes existing files.
+
+[line]
+
+[size=5][b]Credits[/b][/size]
+
+[list]
+[*]Huge thanks to every Gwent artwork mod author out there. This tool would be useless without your beautiful work, and all the art you pick still belongs to its original creators.
+[*]CD PROJEKT RED for The Witcher 3 and for Gwent, the best mini-game ever made.
+[*]Idea, design and testing by me. Most of the code was written with AI assistance.
+[*]Built with Python, Tkinter and Pillow.
+[/list]
+
+[center][i]If you end up with a deck you're proud of, I'd love to see screenshots in the Images tab![/i][/center]
