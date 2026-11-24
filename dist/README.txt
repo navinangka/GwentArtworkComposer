@@ -178,11 +178,13 @@ The ZIP is validated structurally; final priority and rendering must
 be checked in game after installation.
 
 Updating / building from source
-Change source/version.py, then run: python source\build.py
-Requires Python 3.12+, Pillow, and PyInstaller in the build environment.
+Change source/version.py, then run build.bat from the project root.
+It requires Python 3.12+ and the Python launcher. On the first run, it
+creates .venv and installs Pillow and PyInstaller (internet required).
 The build uses that version for the title and EXE metadata and writes
-dist\GwentArtworkComposer.exe. Users need only the EXE.
-Run tests with: python -m unittest discover -s source -p test_*.py
+dist\GwentArtworkComposer.exe, replacing any existing file at that path.
+Users need only the EXE.
+Run tests with: .venv\Scripts\python.exe -m unittest discover -s source -p test_*.py
 
 Format reference
 https://github.com/Systemcluster/w3edit/blob/main/w3edit-formats.md
